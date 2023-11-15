@@ -3,10 +3,12 @@
 * CIS175 - Fall 2023
 * Nov 15, 2023
 */
-package raaz.config;
+package raaz.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import raaz.beans.Product;
 
 /**
  * @author Rachel Schulz - rsschulz
@@ -14,10 +16,12 @@ import org.springframework.context.annotation.Configuration;
  * Nov 15, 2023
  */
 @Configuration
-public class ProductBeanConfig {
+public class BeanConfiguration {
 	
 	@Bean
-	public Product product = new Product();
-	return product;
+    public Product product() {
+        Product bean = new Product();
+        return bean;
+    }
 	
 }
