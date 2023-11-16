@@ -8,6 +8,7 @@ package raaz.controller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import raaz.beans.Manufacturer;
 import raaz.beans.Product;
 
 /**
@@ -23,5 +24,11 @@ public class BeanConfiguration {
         Product bean = new Product();
         return bean;
     }
+	
+	@Bean
+	public Manufacturer manufacturer() {
+		Manufacturer bean = new Manufacturer();
+		return bean;
+	}
 	
 }
