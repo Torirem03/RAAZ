@@ -19,7 +19,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Manufacturer {
-	
+	//Test - Zoie
+	//AHHHHHHHHHH
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long manId;
