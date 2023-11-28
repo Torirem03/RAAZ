@@ -32,14 +32,14 @@ public class ProductController {
 			return addNewProduct(model);
 		}
 		model.addAttribute("products", repo.findAll());
-		return "results";
+		return "allProducts";
 	}
 
 	@GetMapping("/inputProduct")
 	private String addNewProduct(Model model) {
 		Product p = new Product();
 		model.addAttribute("newProduct", p);
-		return "input";
+		return "inputProduct";
 	}
 	
 	@PostMapping("/inputProduct")
@@ -59,7 +59,7 @@ public class ProductController {
 	public String showProductToUpdate(@PathVariable("productId") long productId, Model model) {
 		Product p = repo.findById(productId).orElse(null);
 		model.addAttribute("newProduct", p);
-		return "input";
+		return "inputProduct";
 	}
 	
 	@PostMapping("/updateProduct/{productId}")
