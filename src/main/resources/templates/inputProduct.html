@@ -18,7 +18,7 @@
 </head>
 <header th:replace="fragments/header :: header"></header>
 <body>
-	<form th:object="${newProduct}" name="productForm" th:action="@{/update/{id}(id=${newProduct.id})}" method=POST>
+	<form th:object="${newProduct}" name="productForm" th:action="@{/updateProduct/{productId}(productId=${newProduct.productId})}" method=POST>
 		Product Name: <input name="productName" size="20" th:field="*{productName}"><br />
 		Description: <input name="description" size="20" th:field="*{description}"><br />
 		Cost: <input name="cost" size="20" th:field="*{cost}"><br />
