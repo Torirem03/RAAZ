@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import raaz.beans.Manufacturer;
+import raaz.repository.ManRepository;
 import raaz.repository.RAAZRepository;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class ManufacturerController {
 
     @Autowired
-    private RAAZRepository raazRepository;
+    private ManRepository raazRepository;
 
     @GetMapping("/viewAll")
     public String viewAllMans(Model model) {
