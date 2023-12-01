@@ -15,12 +15,17 @@
 		body {
 			background-color: antiquewhite;
 		}
+		h1 {
+			text-align: center;
+		}
 	</style>
 
 </head>
 
 <body>
 	<header th:replace="fragments/header :: header"></header>
+	
+	<h1>RAAZ Products</h1>
 
 	<div class="container">
 		<a th:href="@{/inputProduct}" class="btn btn-success me-3 mb-2 mb-lg-0">Add New Product</a>
