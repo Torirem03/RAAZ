@@ -14,39 +14,39 @@ import java.util.Optional;
 public class ManufacturerController {
 
     @Autowired
-    private ManRepository raazRepository;
+    private ManRepository manRepository;
 
-    @GetMapping("/viewAll")
+    @GetMapping("/viewAllMans")
     public String viewAllMans(Model model) {
-        if (raazRepository.findAll().isEmpty()) {
+        if (manRepository.findAll().isEmpty()) {
             return addNewMan(model);
         }
-        model.addAttribute("manufacturers", raazRepository.findAll());
-        return "viewManufacturer";
+        model.addAttribute("manufacturers", manRepository.findAll());
+        return "allMans";
     }
 
-    @GetMapping("/inputProduct")
+    @GetMapping("/inputMan")
     public String addNewMan(Model model) {
         model.addAttribute("manufacturer", new Manufacturer());
-        return "addManufacturer";
+        return "inputMan";
     }
 
-    @PostMapping("/inputProduct")
+    @PostMapping("/inputMan")
     public String addNewMan(@ModelAttribute Manufacturer manufacturer, Model model) {
-        raazRepository.save(manufacturer);
+        manRepository.save(manufacturer);
         return "redirect:/manufacturer/viewAll";
     }
 
     @GetMapping("/edit/{id}")
     public String showUpdateMan(@PathVariable("id") long id, Model model) {
-        Optional<Manufacturer> manufacturer = raazRepository.findById(id);
+        Optional<Manufacturer> manufacturer = manRepository.findById(id);
         model.addAttribute("manufacturer", manufacturer.orElse(null));
         return "editManufacturer";
     }
 
     @PostMapping("/update/{id}")
     public String reviseMan(@ModelAttribute Manufacturer updatedManufacturer, @PathVariable("id") long id, Model model) {
-        Optional<Manufacturer> existingManufacturer = raazRepository.findById(id);
+        Optional<Manufacturer> existingManufacturer = manRepository.findById(id);
         if (existingManufacturer.isPresent()) {
             Manufacturer manufacturer = existingManufacturer.get();
             manufacturer.setManName(updatedManufacturer.getManName());
@@ -56,14 +56,14 @@ public class ManufacturerController {
             manufacturer.setZip(updatedManufacturer.getZip());
             manufacturer.setEmail(updatedManufacturer.getEmail());
             manufacturer.setPhone(updatedManufacturer.getPhone());
-            raazRepository.save(manufacturer);
+            manRepository.save(manufacturer);
         }
         return "redirect:/manufacturer/viewAll";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteMan(@PathVariable("id") long id, Model model) {
-        raazRepository.deleteById(id);
+        manRepository.deleteById(id);
         return "redirect:/manufacturer/viewAll";
     }
 }
