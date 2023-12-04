@@ -21,7 +21,9 @@
 <body>
 	<header th:replace="fragments/header :: header"></header>
 	
-	<form th:object="${manufacturer}" th:action="@{/update/{id}}(id=${manufacturer.manId})" method=POST>
+	<h2>Add/Update Manufacturer</h2>
+	
+	<form th:object="${manufacturer}" th:action="@{/manufacturer/edit/{id}(id=${manufacturer.manId})}" method=POST>
 		<div class="form-group">
 			<label for="inputId">Manufacturer Id: </label>
 			<input type="text" name="inputId" id="inputId" size="10" th:field="*{manId}" />

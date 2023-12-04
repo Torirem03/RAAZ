@@ -34,7 +34,7 @@
         <h2>All Manufacturers</h2>
 
         <!-- Add Manufacturer Button -->
-        <a href="/manufacturer/inputProduct" class="btn btn-success mb-3">Add Manufacturer</a>
+        <a href="/manufacturer/inputMan" class="btn btn-success mb-3">Add Manufacturer</a>
 
         <!-- Man Table -->
         <table class="table table-dark">
@@ -60,7 +60,7 @@
             <td th:text="${manufacturer.state}"></td>
             <td th:text="${manufacturer.zip}"></td>
             <td th:text="${manufacturer.email}"></td>
-            <td th:text="${manufacturer.phone}"></td>
+            <td th:text="'('+ ${#strings.substring(manufacturer.phone,0,3)} + ')' + ${#strings.substring(manufacturer.phone,3,6)} + '-' + ${#strings.substring(manufacturer.phone,6,10)}"></td>
             <td>
                 <a th:href="@{/manufacturer/edit/{id}(id=${manufacturer.manId})}" class="btn btn-warning btn-sm">Edit</a>
                 <a th:href="@{/manufacturer/delete/{id}(id=${manufacturer.manId})}" class="btn btn-danger btn-sm">Delete</a>

@@ -41,7 +41,7 @@ public class ManufacturerController {
     public String showUpdateMan(@PathVariable("id") long id, Model model) {
         Optional<Manufacturer> manufacturer = manRepository.findById(id);
         model.addAttribute("manufacturer", manufacturer.orElse(null));
-        return "editManufacturer";
+        return "inputMan";
     }
 
     @PostMapping("/update/{id}")
