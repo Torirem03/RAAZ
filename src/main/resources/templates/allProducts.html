@@ -18,6 +18,9 @@
 		h1 {
 			text-align: center;
 		}
+		.costOutput {
+			text-align: right;
+		}
 	</style>
 
 </head>
@@ -48,7 +51,7 @@
 							<td th:text="${currentproduct.productId}"></td>
 							<td th:text="${currentproduct.productName}"></td>
 							<td th:text="${currentproduct.description}"></td>
-							<td th:text="${#numbers.formatDecimal(currentproduct.cost,0,'COMMA',2,'POINT')}"></td>
+							<td class="costOutput" th:text="${#numbers.formatCurrency(currentproduct.cost)}"></td>
 							<td th:text="${currentproduct.stock}"></td>
 							<td th:text="${currentproduct.Manufacturer.manName}"></td>
 							<td><a class="btn btn-success mr-2"
