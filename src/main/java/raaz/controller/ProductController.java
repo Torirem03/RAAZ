@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import raaz.beans.Product;
+import raaz.repository.ManRepository;
 import raaz.repository.RAAZRepository;
 import raaz.service.InventoryService;
 
@@ -33,7 +34,12 @@ public class ProductController {
 	RAAZRepository repo;
 	
 	@Autowired
+	ManRepository manRepository;
+	
+	@Autowired
 	private InventoryService inventoryService;
+	
+
 	
 	@GetMapping("/allProducts")
 	public String viewAllProducts(Model model) {
@@ -48,13 +54,14 @@ public class ProductController {
 	private String addNewProduct(Model model) {
 		Product p = new Product();
 		model.addAttribute("newProduct", p);
+		model.addAttribute("manufacturers", manRepository.findAll());
 		return "inputProduct";
 	}
 	
 	@PostMapping("/inputProduct")
 	public String addNewProduct(@ModelAttribute Product p, Model model) {
 		repo.save(p);
-		return viewAllProducts(model);
+		return "redirect:/allProducts";
 	}
 	
 	@GetMapping("/deleteProduct/{productId}")
@@ -68,13 +75,14 @@ public class ProductController {
 	public String showProductToUpdate(@PathVariable("productId") long productId, Model model) {
 		Product p = repo.findById(productId).orElse(null);
 		model.addAttribute("newProduct", p);
+		model.addAttribute("manufacturers", manRepository.findAll());
 		return "inputProduct";
 	}
 	
 	@PostMapping("/updateProduct/{productId}")
 	public String updateProduct(Product p, Model model) {
 		repo.save(p);
-		return viewAllProducts(model);
+		return "redirect:/allProducts";
 	}
 	
 
@@ -96,7 +104,7 @@ public class ProductController {
     @GetMapping("/manage/{productId}")
     public String manageInventory(@PathVariable("productId") long productId, Model model) {    	
 		Product p = repo.findById(productId).orElse(null);
-		model.addAttribute("newProduct", p);    	
+		model.addAttribute("newProduct", p); 		
     	return "manage";
     }
 	
