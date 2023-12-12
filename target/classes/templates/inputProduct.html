@@ -35,24 +35,73 @@
 		body {
 			background-color: antiquewhite;
 		}
+
+		label {
+			display: inline-block;
+			width: 100px;
+			margin: 5px;
+			text-align: left;
+		}
+
+		input[type=text],
+		input[type=password],
+		select {
+			display: inline-block;
+			width: 200px;
+		}
+
+		input[type=radio] {
+			margin-left: 45px;
+		}
+
+		input[type=checkbox] {
+			margin-right: 190px;
+		}
+
+		button {
+			padding: 5px;
+			margin: 10px;
+		}
+			    /* Add a margin to the bottom of buttons when collapsed */
+	    @media (max-width: 768px) {
+	        .navbar-nav .btn {
+	            margin-bottom: 10px; /* Adjust the margin size as needed */
+	        }
+    }
 	</style>
 </head>
 <header th:replace="~{fragments/header :: header}"></header>
-	<div class="container">
-		<div class="row">
-			<h1>Add Product</h1>
-		</div>
-		<div>
-				<form th:object="${newProduct}" name="productForm" th:action="@{/updateProduct/{productId}(productId=${newProduct.productId})}" method=POST onsubmit="validate();" class="border border-dark p-3">
-					Product Name: <input name="productName" size="20" placeholder="Name of product" th:field="*{productName}" required><br />
-					Description: <input name="description" size="20" placeholder="Description" th:field="*{description}"><br />
-					Cost: <input name="cost" size="20" th:field="*{cost}" required><br />
-					Stock: <input name="stock" size="20" th:field="*{stock}" required><br />
-					Manufacturer ID: <input name="manId" size="20" type="number" min="1" th:field="*{manufacturer.manId}" required><br />
 
-					<input name="submit" type="submit" value="Submit" />
-				</form>
-		</div>
+	<div class="container">
+		<h2>Add/Update Product</h2>
+		<form th:object="${newProduct}" name="productForm" th:action="@{/updateProduct/{productId}(productId=${newProduct.productId})}" method=POST onsubmit="validate();">
+			<div class="form-group">
+				<label>Name:</label>
+				<input name="productName" size="20" placeholder="Name of product" th:field="*{productName}" required><br />
+				
+				<label>Description:</label>
+				<input name="description" size="20" placeholder="Description" th:field="*{description}"><br />
+				
+				<label>Cost:</label>
+				<input name="cost" size="20" th:field="*{cost}" required><br />
+				
+				<label>Stock:</label>
+				<input name="stock" size="20" th:field="*{stock}" required><br />
+				
+				<label>Manufacturer</label>					
+				<select class="form-control-sm d-inline-block" id="" th:field="*{manufacturer.manId}" name="manufacturerId" >	
+					<option th:value="0" disabled="disabled">Select</option>																	
+					<option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.manId}" th:text="${manufacturer.manName}">Select Manufacturer</option>
+					
+				</select><br />
+				<input class="btn btn-success mt-2" name="submit" type="submit" value="Submit" />
+			</div>
+		</form>
 	</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
